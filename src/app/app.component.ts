@@ -1,9 +1,17 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `<div>Hello {{value}}</div>`,
+  template: `Hello<div>{{message}}</div>`,
 })
 export class AppComponent {
-  value = 'and Welcome to Australia';
+  message = '';
+
+  constructor(private http: HttpClient) {
+    console.log("enter");
+    
+    this.http.get('/api/message')
+      .subscribe((resp: any) => this.message = resp);
+  }
 }
